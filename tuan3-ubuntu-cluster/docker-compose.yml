@@ -1,0 +1,39 @@
+services:
+  hadoop-master:
+    build: .
+    image: tuan3-ubuntu-hadoop-spark:3.3.6-3.5.3
+    container_name: hadoop-master
+    hostname: hadoop-master
+    ports:
+      - "9870:9870"   # HDFS NameNode Web UI
+      - "8088:8088"   # YARN ResourceManager Web UI
+      - "8080:8080"   # Spark Master Web UI
+      - "7077:7077"   # Spark Master RPC
+    networks:
+      - hadoop-net
+
+  hadoop-slave1:
+    image: tuan3-ubuntu-hadoop-spark:3.3.6-3.5.3
+    container_name: hadoop-slave1
+    hostname: hadoop-slave1
+    depends_on:
+      - hadoop-master
+    ports:
+      - "8081:8081"   # Spark Worker 1 Web UI
+    networks:
+      - hadoop-net
+
+  hadoop-slave2:
+    image: tuan3-ubuntu-hadoop-spark:3.3.6-3.5.3
+    container_name: hadoop-slave2
+    hostname: hadoop-slave2
+    depends_on:
+      - hadoop-master
+    ports:
+      - "8082:8081"   # Spark Worker 2 Web UI
+    networks:
+      - hadoop-net
+
+networks:
+  hadoop-net:
+    driver: bridge

@@ -1,0 +1,4 @@
+Hadoop Yarn Spark Ubuntu Cluster
+Hadoop Master and Hadoop Slave1 and Hadoop Slave2
+Spark is fast and Spark works great with Hadoop HDFS and YARN
+Big Data processing on distributed cluster
